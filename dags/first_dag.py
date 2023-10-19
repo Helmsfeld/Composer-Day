@@ -100,7 +100,7 @@ with models.DAG(
         task_id="show_secret",
         # Executing 'bq' command requires Google Cloud SDK which comes
         # preinstalled in Cloud Composer.
-        bash_command='echo "MY SECRET: {{ var.value.my-secret }}" '
+        bash_command='echo "MY SECRET: {{ var.value.mysecret }}" '
     )
 
 
