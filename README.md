@@ -3,6 +3,7 @@
 ## What is this?
 This repository contains some, snippets, boilerplates and setup scripts to help you get started with the Composer Day Workshop.
 
+
 The Composer day workshop will help you get started with Google Cloud Composer, Googles managed [Apache Airflow](https://airflow.apache.org/) orchastrator for managing your data pipelines in the cloud. 
 
 ## How to use?
