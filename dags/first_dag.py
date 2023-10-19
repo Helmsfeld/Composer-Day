@@ -20,7 +20,6 @@ https://airflow.apache.org/docs/apache-airflow/stable/concepts/variables.html
 
 # 1051621342757-compute@developer.gserviceaccount.com
 
-
 import datetime
 from airflow import models
 from airflow.models.param import Param
