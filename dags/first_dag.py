@@ -55,10 +55,10 @@ BQ_AGG_STREETS_QUERY = """
             AVG(readings.co_ppm) AS avg_co_ppm,
             MIN(readings.timestamp) AS min_timestamp,
             MAX(readings.timestamp) AS max_timestamp,
-        FROM `composer-workshop.greenhat.readings` AS readings
-        LEFT JOIN `composer-workshop.greenhat.space_and_time_continuum` AS space_and_time
+        FROM `{{ params.gcp_project }}.greenhat.readings` AS readings
+        LEFT JOIN `{{ params.gcp_project }}.greenhat.space_and_time_continuum` AS space_and_time
             ON readings.timestamp = space_and_time.timestamp
-        LEFT JOIN `composer-workshop.greenhat.road_config` AS roads
+        LEFT JOIN `{{ params.gcp_project }}.greenhat.road_config` AS roads
             ON space_and_time.road_id = roads.road_id
         WHERE readings.timestamp >= CAST('{{ params.min_query_date }}' AS TIMESTAMP)
             AND readings.timestamp < CAST('{{ params.max_query_date }}' AS TIMESTAMP)
@@ -87,7 +87,7 @@ with models.DAG(
          "min_query_date": Param("2022-01-01", type="string"),
          "bq_dataset_name": Param("greenhat_summary", type="string"),
          "business_datetime": Param(default_business_datetime, type="string"),
-         "gcp_project": Param("composer-workshop", type="string"),
+         "gcp_project": Param("qwiklabs-gcp-00-e8e2abf5a57b", type="string"),
          "output_gcs_bucket": Param("composer-workshop-data-output", type="string")
      },
 ) as dag:
