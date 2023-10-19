@@ -31,6 +31,7 @@ from airflow.providers.google.cloud.secrets.secret_manager import CloudSecretMan
 from airflow.utils import trigger_rule
 
 
+
 target_dataset_name = "greenhat_summary"
 target_table_name = "readings_by_street"
 location = "us-central1"
