@@ -150,10 +150,10 @@ with models.DAG(
 
 
     # Define DAG dependencies.
-    show_secret >> make_bq_dataset
     make_bq_dataset >> bq_aggregate_streets
     bq_aggregate_streets >> aggregate_streets_to_avro
     bq_aggregate_streets >> aggregate_streets_to_csv
-    aggregate_streets_to_avro >> this_is_the_end
-    aggregate_streets_to_csv >> this_is_the_end
+    aggregate_streets_to_avro >> show_secret
+    aggregate_streets_to_csv >> show_secret
+    show_secret >> this_is_the_end
     
