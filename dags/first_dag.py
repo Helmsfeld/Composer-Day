@@ -18,6 +18,8 @@ https://airflow.apache.org/docs/apache-airflow/stable/concepts/variables.html
 * email - The email used to receive DAG updates.
 """
 
+# 1051621342757-compute@developer.gserviceaccount.com
+
 
 import datetime
 from airflow import models
@@ -47,12 +49,7 @@ max_query_date = "2022-03-01"
 min_query_date = "2022-01-01"
 
 secrets.backend = airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
-secrets.backend_kwargs = {
-    "connections_prefix": "airflow-connections", 
-    "variables_prefix": "airflow-variables", 
-    "sep": "-",
-    "project_id"=project_id
-    }
+secrets.backend_kwargs = {"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "sep": "-", "project_id":project_id }
 
 BQ_AGG_STREETS_QUERY = """
         SELECT 
@@ -105,7 +102,7 @@ with models.DAG(
         task_id="show_secret",
         # Executing 'bq' command requires Google Cloud SDK which comes
         # preinstalled in Cloud Composer.
-        bash_command="echo hi",
+        bash_command='echo "MY SECRET: {{ var.value.my-secret }}" '
     )
 
 
