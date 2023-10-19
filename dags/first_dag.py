@@ -48,8 +48,6 @@ avro_output_file = f"gs://{gcs_bucket}/street_readings.avro"
 max_query_date = "2022-03-01"
 min_query_date = "2022-01-01"
 
-secrets.backend = airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
-secrets.backend_kwargs = {"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "sep": "-", "project_id":project_id }
 
 BQ_AGG_STREETS_QUERY = """
         SELECT 
