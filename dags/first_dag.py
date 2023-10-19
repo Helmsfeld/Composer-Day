@@ -88,7 +88,7 @@ with models.DAG(
          "bq_dataset_name": Param("greenhat_summary", type="string"),
          "business_datetime": Param(default_business_datetime, type="string"),
          "gcp_project": Param("qwiklabs-gcp-00-e8e2abf5a57b", type="string"),
-         "output_gcs_bucket": Param("composer-workshop-data-output", type="string")
+         "output_gcs_bucket": Param("qwiklabs-gcp-00-e8e2abf5a57b-data-output", type="string")
      },
 ) as dag:
     def greeting():
