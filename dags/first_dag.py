@@ -91,6 +91,15 @@ with models.DAG(
         import logging
         logging.info("Goodbye!")
 
+    # Output secret
+    show_secret = bash.BashOperator(
+        task_id="show_secret",
+        # Executing 'bq' command requires Google Cloud SDK which comes
+        # preinstalled in Cloud Composer.
+        bash_command="echo hi",
+    )
+
+
     # Create BigQuery output dataset.
     make_bq_dataset = bash.BashOperator(
         task_id="make_bq_dataset",
@@ -136,6 +145,7 @@ with models.DAG(
 
 
     # Define DAG dependencies.
+    show_secret >> make_bq_dataset
     make_bq_dataset >> bq_aggregate_streets
     bq_aggregate_streets >> aggregate_streets_to_avro
     bq_aggregate_streets >> aggregate_streets_to_csv
