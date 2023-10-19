@@ -56,6 +56,46 @@ resource "google_composer_environment" "example_environment" {
   // ---- Challenge ---- // 
   // Create a cloud composer 2 instance following the documenation below: 
   // https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/composer_environment#with-gke-and-compute-resource-dependencies
+
+  name   = "example-composer-env-tf-c2"
+  region = "us-central1"
+  config {
+
+    software_config {
+      image_version = "composer-2-airflow-2"
+    }
+
+    workloads_config {
+      scheduler {
+        cpu        = 0.5
+        memory_gb  = 1.875
+        storage_gb = 1
+        count      = 1
+      }
+      web_server {
+        cpu        = 0.5
+        memory_gb  = 1.875
+        storage_gb = 1
+      }
+      worker {
+        cpu = 0.5
+        memory_gb  = 1.875
+        storage_gb = 1
+        min_count  = 1
+        max_count  = 3
+      }
+
+
+    }
+    environment_size = "ENVIRONMENT_SIZE_SMALL"
+
+    node_config {
+      network    = google_compute_network.test.id
+      subnetwork = google_compute_subnetwork.test.id
+      service_account = google_service_account.custom_service_account.name
+    }
+  }
+
 }
 
 resource "google_compute_network" "test" {
