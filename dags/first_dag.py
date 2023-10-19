@@ -78,6 +78,10 @@ default_dag_args = {
     "project_id": project_id,
 }
 
+secret = "{{ var.value.mysecret }}"
+
+i_know_it = (secret == "s3cr3t")
+
 with models.DAG(
     "first_dag",
     schedule_interval=datetime.timedelta(weeks=4),
@@ -95,12 +99,14 @@ with models.DAG(
         import logging
         logging.info("Goodbye!")
 
+    "
+
     # Output secret
     show_secret = bash.BashOperator(
         task_id="show_secret",
         # Executing 'bq' command requires Google Cloud SDK which comes
         # preinstalled in Cloud Composer.
-        bash_command='echo "MY SECRET: {{ var.value.mysecret }}" '
+        bash_command=f'echo "MY SECRET: {{ var.value.mysecret }} {i_know_it}" '
     )
 
 
