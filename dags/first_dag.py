@@ -18,6 +18,7 @@ https://airflow.apache.org/docs/apache-airflow/stable/concepts/variables.html
 * email - The email used to receive DAG updates.
 """
 
+
 import datetime
 from airflow import models
 from airflow.models.param import Param
